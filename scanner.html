@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TrustAI Scanner</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+
+<div class="logo">
+<h1>TrustAI</h1>
+</div>
+
+<nav>
+<a href="index.html">Home</a>
+<a href="#">Dashboard</a>
+<a href="#">History</a>
+<a href="#">Profile</a>
+</nav>
+
+</header>
+
+<section class="hero">
+
+<h1>Website Safety Scanner</h1>
+
+<p>
+Enter any website URL and let TrustAI analyze it.
+</p>
+
+<input
+type="text"
+id="websiteInput"
+placeholder="https://example.com"
+class="scan-input">
+
+<br><br>
+
+<button onclick="scanWebsite()">
+Scan Website
+</button>
+
+<div id="result" class="result-box">
+
+<h2>Waiting for scan...</h2>
+
+</div>
+
+</section>
+
+<script src="script.js"></script>
+
+</body>
+</html>
