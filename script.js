@@ -41,3 +41,60 @@ result.innerHTML=`
 },2000);
 
 }
+function signup(){
+
+const user={
+name:document.getElementById("name").value,
+email:document.getElementById("email").value,
+password:document.getElementById("password").value
+};
+
+localStorage.setItem("trustUser",JSON.stringify(user));
+
+alert("Account created successfully!");
+
+window.location="login.html";
+
+}
+
+function login(){
+
+const saved=JSON.parse(localStorage.getItem("trustUser"));
+
+const email=document.getElementById("loginEmail").value;
+
+const password=document.getElementById("loginPassword").value;
+
+if(saved && email===saved.email && password===saved.password){
+
+localStorage.setItem("loggedIn","true");
+
+window.location="dashboard.html";
+
+}else{
+
+alert("Incorrect email or password.");
+
+}
+
+}
+
+function logout(){
+
+localStorage.removeItem("loggedIn");
+
+window.location="login.html";
+
+}
+
+if(document.getElementById("welcome")){
+
+const user=JSON.parse(localStorage.getItem("trustUser"));
+
+if(user){
+
+document.getElementById("welcome").innerHTML="Hello, "+user.name+" 👋";
+
+}
+
+}
