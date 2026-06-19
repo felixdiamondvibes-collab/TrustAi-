@@ -1,12 +1,43 @@
-// TrustAI Startup Project
-// Version 1.0
+function scanWebsite(){
 
-console.log("TrustAI Loaded Successfully!");
+const url=document.getElementById("websiteInput").value;
 
-const scanButton = document.querySelector("button");
+const result=document.getElementById("result");
 
-scanButton.addEventListener("click", () => {
-    alert(
-        "🚀 Welcome to TrustAI!\n\nThe AI Scanner is under development.\nSoon you'll be able to scan websites, emails, messages, and QR codes."
-    );
-});
+if(url===""){
+
+result.innerHTML="<h2>Please enter a website.</h2>";
+
+return;
+
+}
+
+result.innerHTML=`
+<h2>Scanning...</h2>
+<p>Analyzing ${url}</p>
+`;
+
+setTimeout(()=>{
+
+const score=Math.floor(Math.random()*41)+60;
+
+let status="Safe";
+
+if(score<75){
+
+status="Suspicious";
+
+}
+
+result.innerHTML=`
+<h2>Trust Score: ${score}/100</h2>
+
+<h3>Status: ${status}</h3>
+
+<p>This is currently a demonstration scanner.</p>
+
+`;
+
+},2000);
+
+}
