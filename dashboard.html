@@ -1,47 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Dashboard</title>
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TrustAI Dashboard</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
-
 <body>
 
-<header>
+<header class="header">
+    <h1>TrustAI</h1>
 
-<h1>TrustAI Dashboard</h1>
-
-<button onclick="logout()">
-Logout
-</button>
-
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="scanner.html">Scan</a>
+        <a href="#">Reports</a>
+        <a href="#">Settings</a>
+    </nav>
 </header>
 
-<section class="hero">
+<section class="dashboard">
 
-<h2 id="welcome"></h2>
+<h2>Welcome Back 👋</h2>
 
-<p>
+<p>Your AI Protection Center</p>
 
-Welcome to your dashboard.
+<div class="cards">
 
-Soon this page will contain:
+<div class="card">
+<h3>Total Scans</h3>
+<p>0</p>
+</div>
 
-</p>
+<div class="card">
+<h3>Safe Links</h3>
+<p>0</p>
+</div>
 
-<ul style="margin-top:30px;line-height:2;">
-<li>Website Scanner</li>
-<li>Email Scanner</li>
-<li>Scan History</li>
-<li>Trust Reports</li>
-<li>AI Assistant</li>
-</ul>
+<div class="card">
+<h3>Threats Detected</h3>
+<p>0</p>
+</div>
+
+<div class="card">
+<h3>Risk Score</h3>
+<p>100%</p>
+</div>
+
+</div>
 
 </section>
 
-<script src="script.js"></script>
+<script src="js/script.js"></script>
 
 </body>
 </html>
