@@ -230,3 +230,26 @@ font-size:28px;
 font-weight:bold;
 color:#2563eb;
 }
+.scanner{
+max-width:800px;
+margin:auto;
+padding:40px;
+text-align:center;
+}
+
+textarea{
+width:100%;
+padding:15px;
+font-size:16px;
+border-radius:10px;
+border:1px solid #ccc;
+resize:vertical;
+}
+
+.result{
+margin-top:25px;
+padding:20px;
+border-radius:10px;
+font-size:20px;
+font-weight:bold;
+}
