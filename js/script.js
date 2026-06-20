@@ -1,13 +1,24 @@
-function scanText(){
+async function scanText(){
 
-const input=document.getElementById("scanInput").value.toLowerCase();
+const input=document.getElementById("scanInput").value;
 
 const result=document.getElementById("result");
 
-if(input===""){
-result.innerHTML="Please enter text or a website.";
-result.style.background="#ffe8e8";
+if(input.trim()===""){
+result.innerHTML="Please enter a message or website.";
 return;
+}
+
+result.innerHTML="Analyzing with AI...";
+
+const response=await analyzeWithAI(input);
+
+result.innerHTML=`
+<h3>${response.risk}</h3>
+<p>Risk Score: ${response.score}%</p>
+<p>${response.explanation}</p>
+`;
+
 }
 
 const scamWords=[
