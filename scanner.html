@@ -1,60 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TrustAI Scanner</title>
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TrustAI Scanner</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
-
 <body>
 
-<header>
+<header class="header">
+    <h1>TrustAI</h1>
 
-<div class="logo">
-<h1>TrustAI</h1>
-</div>
-
-<nav>
-<a href="index.html">Home</a>
-<a href="#">Dashboard</a>
-<a href="#">History</a>
-<a href="#">Profile</a>
-</nav>
-
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="scanner.html">Scanner</a>
+    </nav>
 </header>
 
-<section class="hero">
+<section class="scanner">
 
-<h1>Website Safety Scanner</h1>
+<h2>AI Scam Scanner</h2>
 
-<p>
-Enter any website URL and let TrustAI analyze it.
-</p>
+<p>Paste a suspicious message, website link, or email below.</p>
 
-<input
-type="text"
-id="websiteInput"
-placeholder="https://example.com"
-class="scan-input">
+<textarea
+id="scanInput"
+placeholder="Paste text or URL here..."
+rows="8">
+</textarea>
 
 <br><br>
 
-<button onclick="scanWebsite()">
-Scan Website
-</button>
+<button onclick="scanText()">Scan Now</button>
 
-<div id="result" class="result-box">
-
-<h2>Waiting for scan...</h2>
-
-</div>
+<div id="result" class="result"></div>
 
 </section>
-  
-  <script src="js/scanner.js"></script>
 
-<script src="script.js"></script>
+<script src="js/script.js"></script>
 
 </body>
 </html>
