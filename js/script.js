@@ -1,100 +1,50 @@
-function scanWebsite(){
+function scanText(){
 
-const url=document.getElementById("websiteInput").value;
+const input=document.getElementById("scanInput").value.toLowerCase();
 
 const result=document.getElementById("result");
 
-if(url===""){
-
-result.innerHTML="<h2>Please enter a website.</h2>";
-
+if(input===""){
+result.innerHTML="Please enter text or a website.";
+result.style.background="#ffe8e8";
 return;
-
 }
 
-result.innerHTML=`
-<h2>Scanning...</h2>
-<p>Analyzing ${url}</p>
-`;
+const scamWords=[
+"bitcoin",
+"crypto",
+"investment",
+"double your money",
+"urgent",
+"click here",
+"bank",
+"password",
+"gift card",
+"verify account",
+"lottery",
+"airdrop",
+"wallet"
+];
 
-setTimeout(()=>{
+let risk=0;
 
-const score=Math.floor(Math.random()*41)+60;
-
-let status="Safe";
-
-if(score<75){
-
-status="Suspicious";
-
+scamWords.forEach(word=>{
+if(input.includes(word)){
+risk++;
 }
+});
 
-result.innerHTML=`
-<h2>Trust Score: ${score}/100</h2>
-
-<h3>Status: ${status}</h3>
-
-<p>This is currently a demonstration scanner.</p>
-
-`;
-
-},2000);
-
+if(risk>=3){
+result.innerHTML="🚨 HIGH RISK SCAM DETECTED";
+result.style.background="#ffb3b3";
 }
-function signup(){
-
-const user={
-name:document.getElementById("name").value,
-email:document.getElementById("email").value,
-password:document.getElementById("password").value
-};
-
-localStorage.setItem("trustUser",JSON.stringify(user));
-
-alert("Account created successfully!");
-
-window.location="login.html";
-
+else if(risk>=1){
+result.innerHTML="⚠️ Suspicious Content";
+result.style.background="#ffe08a";
 }
-
-function login(){
-
-const saved=JSON.parse(localStorage.getItem("trustUser"));
-
-const email=document.getElementById("loginEmail").value;
-
-const password=document.getElementById("loginPassword").value;
-
-if(saved && email===saved.email && password===saved.password){
-
-localStorage.setItem("loggedIn","true");
-
-window.location="dashboard.html";
-
-}else{
-
-alert("Incorrect email or password.");
-
-}
-
-}
-
-function logout(){
-
-localStorage.removeItem("loggedIn");
-
-window.location="login.html";
-
-}
-
-if(document.getElementById("welcome")){
-
-const user=JSON.parse(localStorage.getItem("trustUser"));
-
-if(user){
-
-document.getElementById("welcome").innerHTML="Hello, "+user.name+" 👋";
-
+else{
+result.innerHTML="✅ Looks Safe";
+result.style.background="#b7f5b7";
 }
 
 }
