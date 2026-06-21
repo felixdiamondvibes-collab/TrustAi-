@@ -1,3 +1,5 @@
+import { db, collection, addDoc } from "./firebase.js";
+
 async function scanWebsite() {
 
 const url = document.getElementById("websiteInput").value.trim();
