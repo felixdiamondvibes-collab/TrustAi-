@@ -1,77 +1,57 @@
+
 import { db, collection, addDoc } from "./firebase.js";
 
-async function scanWebsite() {
-
-const url = document.getElementById("websiteInput").value.trim();
-
+const scanBtn = document.getElementById("scanBtn");
+const urlInput = document.getElementById("urlInput");
 const result = document.getElementById("result");
 
-if (!url) {
+scanBtn.addEventListener("click", async () => {
 
-result.innerHTML = `
-<h2>Please enter a website.</h2>
-`;
+    const url = urlInput.value.trim();
 
-return;
+    if (url === "") {
+        alert("Please enter a website URL.");
+        return;
+    }
 
-}
+    // Temporary fake AI logic
+    let verdict = "Safe";
+    let score = 95;
 
-result.innerHTML = `
-<h2>Scanning...</h2>
-<p>Please wait while TrustAI analyzes this website.</p>
-`;
+    const suspiciousWords = [
+        "free",
+        "win",
+        "gift",
+        "bonus",
+        "login",
+        "verify",
+        "bank",
+        "crypto",
+        "wallet"
+    ];
 
-setTimeout(() => {
+    for (let word of suspiciousWords) {
+        if (url.toLowerCase().includes(word)) {
+            verdict = "Suspicious";
+            score = 35;
+        }
+    }
 
-const score = Math.floor(Math.random()*30)+70;
+    result.innerHTML = `
+        <h3>${verdict}</h3>
+        <p>Trust Score: ${score}%</p>
+    `;
 
-let color="green";
-let status="SAFE";
-
-if(score<85){
-
-color="orange";
-status="CAUTION";
-
-}
-
-if(score<75){
-
-color="red";
-status="HIGH RISK";
-
-}
-
-result.innerHTML=`
-
-<h1 style="color:${color};">${status}</h1>
-
-<h2>${score}/100 Trust Score</h2>
-
-<p>
-✔ SSL Check<br>
-✔ Domain Format Check<br>
-✔ URL Pattern Analysis<br>
-✔ Basic Risk Detection
-</p>
-
-`;
-
-},2500);
-
-}
-async function saveScan(url, verdict, score) {
     try {
         await addDoc(collection(db, "reports"), {
-            url: url,
-            verdict: verdict,
-            score: score,
+            url,
+            verdict,
+            score,
             createdAt: new Date().toISOString()
         });
 
-        alert("Scan saved!");
-    } catch (error) {
-        console.error(error);
+        console.log("Saved to Firestore!");
+    } catch (err) {
+        console.error(err);
     }
-}
-<script type="module" src="js/scanner.js"></script>
+});
