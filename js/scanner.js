@@ -1,57 +1,69 @@
-
 import { db, collection, addDoc } from "./firebase.js";
 
 const scanBtn = document.getElementById("scanBtn");
-const urlInput = document.getElementById("urlInput");
+const scanInput = document.getElementById("scanInput");
 const result = document.getElementById("result");
 
 scanBtn.addEventListener("click", async () => {
 
-    const url = urlInput.value.trim();
+    const text = scanInput.value.trim();
 
-    if (url === "") {
-        alert("Please enter a website URL.");
+    if (!text) {
+        alert("Please paste some text, email or URL.");
         return;
     }
 
-    // Temporary fake AI logic
     let verdict = "Safe";
     let score = 95;
+    let reason = "No suspicious keywords detected.";
 
     const suspiciousWords = [
         "free",
+        "winner",
         "win",
         "gift",
         "bonus",
-        "login",
         "verify",
+        "password",
         "bank",
         "crypto",
-        "wallet"
+        "wallet",
+        "bitcoin",
+        "investment",
+        "urgent",
+        "click",
+        "claim",
+        "limited",
+        "login"
     ];
 
-    for (let word of suspiciousWords) {
-        if (url.toLowerCase().includes(word)) {
+    for (const word of suspiciousWords) {
+        if (text.toLowerCase().includes(word)) {
             verdict = "Suspicious";
             score = 35;
+            reason = `Detected suspicious keyword: "${word}"`;
+            break;
         }
     }
 
     result.innerHTML = `
         <h3>${verdict}</h3>
-        <p>Trust Score: ${score}%</p>
+        <p><strong>Trust Score:</strong> ${score}%</p>
+        <p>${reason}</p>
     `;
 
     try {
         await addDoc(collection(db, "reports"), {
-            url,
-            verdict,
-            score,
+            text: text,
+            verdict: verdict,
+            score: score,
+            reason: reason,
             createdAt: new Date().toISOString()
         });
 
-        console.log("Saved to Firestore!");
-    } catch (err) {
-        console.error(err);
+        console.log("Report saved.");
+    } catch (error) {
+        console.error("Firestore Error:", error);
     }
+
 });
