@@ -74,3 +74,4 @@ async function saveScan(url, verdict, score) {
         console.error(error);
     }
 }
+<script type="module" src="js/scanner.js"></script>
