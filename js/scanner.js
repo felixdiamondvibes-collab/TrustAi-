@@ -60,3 +60,17 @@ result.innerHTML=`
 },2500);
 
 }
+async function saveScan(url, verdict, score) {
+    try {
+        await addDoc(collection(db, "reports"), {
+            url: url,
+            verdict: verdict,
+            score: score,
+            createdAt: new Date().toISOString()
+        });
+
+        alert("Scan saved!");
+    } catch (error) {
+        console.error(error);
+    }
+}
